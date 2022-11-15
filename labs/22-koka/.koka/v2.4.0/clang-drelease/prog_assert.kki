@@ -1,0 +1,71 @@
+module interface prog/assert
+ 
+//------------------------------
+//#kki: import declarations
+ 
+import std/core/types = std/core/types = "";
+import std/core/hnd = std/core/hnd = "";
+import std/core = std/core = "";
+ 
+//------------------------------
+//#kki: external imports
+ 
+ 
+//------------------------------
+//#kki: fixity declarations
+ 
+ 
+//------------------------------
+//#kki: local imported aliases
+ 
+ 
+//------------------------------
+//#kki: type declarations
+ 
+// handlers for the `:assert` effect
+pub recursive type .hnd-assert <(e :: E),a> :: (E, V) -> V {
+  pub con .Hnd-assert(ctl-assert: (std/core/hnd/clause1 :: (V, V, (E, V) -> V, E, V) -> V)<std/core/types/bool,(),(.hnd-assert :: (E, V) -> V),(e :: E),a>) : forall<(e :: E),a> (ctl-assert : (std/core/hnd/clause1 :: (V, V, (E, V) -> V, E, V) -> V)<std/core/types/bool,(),(.hnd-assert :: (E, V) -> V),(e :: E),a>) -> (.hnd-assert :: (E, V) -> V)<(e :: E),a>;
+};
+// `:assert` effect
+pub type assert :: HX {
+  con Assert<(e :: E),a>((.hnd-assert :: (E, V) -> V)<(e :: E),a>) : forall<(e :: E),a> ((.hnd-assert :: (E, V) -> V)<(e :: E),a>) -> (assert :: HX);
+};
+ 
+//------------------------------
+//#kki: declarations
+ 
+// runtime tag for the `:assert` effect
+pub val .tag-assert : (std/core/hnd/htag :: ((E, V) -> V) -> V)<(.hnd-assert :: (E, V) -> V)>;
+// handler for the `:assert` effect
+pub fun .handle-assert : forall<a,(e :: E),b> (cfc : std/core/types/int32, hnd : (.hnd-assert :: (E, V) -> V)<(e :: E),b>, ret : (res : a) -> (e :: E) b, action : () -> <(std/core/types/handled :: HX -> X)<(assert :: HX)>|(e :: E)> a) -> (e :: E) b;
+// select `assert` operation out of the `:assert` effect handler
+pub fun .select-assert : forall<(e :: E),a> (^ hnd : (.hnd-assert :: (E, V) -> V)<(e :: E),a>) -> (std/core/hnd/clause1 :: (V, V, (E, V) -> V, E, V) -> V)<std/core/types/bool,(),(.hnd-assert :: (E, V) -> V),(e :: E),a>;
+// call `assert` operation of the `:assert` effect
+pub fun assert : (value : std/core/types/bool) -> <(std/core/types/handled :: HX -> X)<(assert :: HX)>> ();
+// monadic lift
+fun .mlift521-main : (wild_4 : ()) -> <(std/core/types/handled :: HX -> X)<(assert :: HX)>> ();
+// monadic lift
+fun .mlift522-main : (wild_3 : ()) -> <(std/core/types/handled :: HX -> X)<(assert :: HX)>> ();
+// monadic lift
+fun .mlift523-main : (wild_2 : ()) -> <(std/core/types/handled :: HX -> X)<(assert :: HX)>> ();
+pub fun main : () -> <(std/core/console :: X)> ();
+ 
+//------------------------------
+//#kki: external declarations
+ 
+ 
+//------------------------------
+//#kki: inline definitions
+ 
+//.inline-section
+inline borrow "^" fun .select-assert // inline size: 0
+  = forall<(e :: E),a> fn(hnd: (.hnd-assert :: (E, V) -> V)<(e :: E),a>){
+    (match (hnd) {
+      ((.skip prog/assert/.Hnd-assert((ctl-assert: (std/core/hnd/clause1 :: (V, V, (E, V) -> V, E, V) -> V)<std/core/types/bool,(),(.hnd-assert :: (E, V) -> V),(e :: E),a>) : (std/core/hnd/clause1 :: (V, V, (E, V) -> V, E, V) -> V)<std/core/types/bool,(),(.hnd-assert :: (E, V) -> V),(e :: E),a>) : (.hnd-assert :: (E, V) -> V)<(e :: E),a> ) as .pat: ((.hnd-assert :: (E, V) -> V)<(e :: E),a>))
+         -> ctl-assert;
+    });
+  };
+inline fun assert // inline size: 5
+  = fn<<(std/core/types/handled :: HX -> X)<(assert :: HX)>>>(value: std/core/types/bool){
+    std/core/hnd/.perform1<std/core/types/bool,(),<(std/core/types/handled :: HX -> X)<(assert :: HX)>>,(.hnd-assert :: (E, V) -> V)>((std/core/types/.open<(std/core/types/(<>) :: E),<(std/core/types/handled :: HX -> X)<(assert :: HX)>>,(i : std/core/hnd/ev-index) -> (std/core/hnd/ev :: ((E, V) -> V) -> V)<(.hnd-assert :: (E, V) -> V)>,(i : std/core/hnd/ev-index) -> <(std/core/types/handled :: HX -> X)<(assert :: HX)>> (std/core/hnd/ev :: ((E, V) -> V) -> V)<(.hnd-assert :: (E, V) -> V)>>((std/core/hnd/.evv-at<(.hnd-assert :: (E, V) -> V)>))((std/core/types/.open<(std/core/types/(<>) :: E),<(std/core/types/handled :: HX -> X)<(assert :: HX)>>,(i : std/core/types/int) -> std/core/types/ssize_t,(i : std/core/types/int) -> <(std/core/types/handled :: HX -> X)<(assert :: HX)>> std/core/types/ssize_t>(std/core/ssize_t)(0)))), prog/assert/.select-assert, value);
+  };
