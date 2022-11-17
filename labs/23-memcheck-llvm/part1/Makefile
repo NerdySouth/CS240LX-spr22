@@ -1,4 +1,4 @@
-LLVM_BIN=
+LLVM_BIN=$(LLVM14)
 RTLIB = rtlib
 TEST_SRC = test
 BUILD_DIR=./objs
