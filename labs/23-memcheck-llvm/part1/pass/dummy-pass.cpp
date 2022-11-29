@@ -23,12 +23,18 @@ struct SkeletonPass : public ModulePass {
         // No arguments.
         false);
 
-    // TODO: Define the arguments and return type of print_with_arg.
-
+    // Define the arguments and return type of print_with_arg.
+    std::vector<Type*> args(1, Type::getInt32Ty(context));
+    FunctionType* printWithArgType = FunctionType::get(
+            Type::getVoidTy(context),
+            args,
+            false);
+             
     FunctionCallee printHello =
         M.getOrInsertFunction("print_hello", printHelloType);
 
-    // TODO: Make A FunctionCallee for the print_with_arg function.
+    // Make A FunctionCallee for the print_with_arg function.
+    FunctionCallee printWithArg = M.getOrInsertFunction("print_with_arg", printWithArgType);
 
     bool insertedStart = false;
     // Loop through all the functions.
@@ -49,10 +55,13 @@ struct SkeletonPass : public ModulePass {
           if (CallInst* call = dyn_cast<CallInst>(&I)) {
             // Check if function being called is test.
             if (call->getCalledFunction()->getName() == "test") {
-              // TODO: Get the first argument of test.
-
-              // TODO: Create a call to print_with_arg that also passes
+              // Get the first argument of test.
+                auto arg = call->getArgOperand(0);
+              // Create a call to print_with_arg that also passes
               // the first argument to print_with_arg.
+                IRBuilder<> builder(&I);
+                builder.SetInsertPoint(&I);
+                builder.CreateCall(printWithArg, {arg}, "", nullptr);
             }
           }
         }

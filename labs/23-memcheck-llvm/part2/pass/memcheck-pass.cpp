@@ -84,9 +84,12 @@ struct SkeletonPass : public ModulePass {
           // Instrument Loads
           if (LoadInst* load = dyn_cast<LoadInst>(&I)) {
             // TODO: Get the address where the load occurs.
-
+            Value* addr = load->getPointerOperand();
+            auto ptr = llvm::CastInst::CreateBitOrPointerCast(addr, Type::getInt8PtrTy(context), "");
             // TODO: Cast the address to a uint8 ptr, as expected by log_load.
-
+            IRBuilder<> builder(load);
+            builder.SetInsertPoint(&I);
+            builder.CreateCall(loadFunc, {ptr});
             // TODO: Insert call to log_load.
            
           }
@@ -94,7 +97,12 @@ struct SkeletonPass : public ModulePass {
           // Instrument Stores
           if (StoreInst* store = dyn_cast<StoreInst>(&I)) {
             // TODO: Get the address where the store occurs.
-
+            Value* addr = store->getPointerOperand();
+            auto ptr = llvm::CastInst::CreateBitOrPointerCast(addr, Type::getInt8PtrTy(context), "");
+            // TODO: Cast the address to a uint8 ptr, as expected by log_load.
+            IRBuilder<> builder(store);
+            builder.SetInsertPoint(&I);
+            builder.CreateCall(storeFunc, {ptr});
             // TODO: Cast the address to a uint8 ptr, as expected by log_store.
 
             // TODO: Insert call to log_store.
@@ -103,7 +111,12 @@ struct SkeletonPass : public ModulePass {
           // Keep track of stack addresses to eliminate false positives.
           if (AllocaInst* stack = dyn_cast<AllocaInst>(&I)) {
             // TODO: Get the address where the stack gets allocated.
-
+            auto addr = stack->getType();
+            auto ptr = llvm::CastInst::CreateBitOrPointerCast(addr, Type::getInt8PtrTy(context), "");
+            // TODO: Cast the address to a uint8 ptr, as expected by log_load.
+            IRBuilder<> builder(stack);
+            builder.SetInsertPoint(&I);
+            builder.CreateCall(loadFunc, {ptr});
             // TODO: Cast the address to a uint8 ptr, as expected by log_stack.
 
             // TODO: Insert call to log_store.

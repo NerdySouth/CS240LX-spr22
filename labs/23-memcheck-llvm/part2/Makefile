@@ -1,11 +1,12 @@
-LLVM_BIN=
+LLVM_BIN=$(LLVM14)
 RTLIB=rtlib
 # TEST_SRC=test-use-after-free
-TEST_SRC=test-no-error
+#TEST_SRC=test-no-error
 # TEST_SRC=test-unsafe-store
-# TEST_SRC=test-unsafe-load
+ TEST_SRC=test-unsafe-load
 # TEST_SRC=test-mem-leak
 BUILD_DIR=./objs
+LIB=-I$(LLVM14)/include
 
 all: run
 

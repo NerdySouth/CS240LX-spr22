@@ -1,0 +1,8 @@
+/Users/tristen-macbook/Documents/CS240LX-spr22/labs/23-memcheck-llvm/part2/build/CMakeFiles/intrinsics_gen.dir
+/Users/tristen-macbook/Documents/CS240LX-spr22/labs/23-memcheck-llvm/part2/build/CMakeFiles/omp_gen.dir
+/Users/tristen-macbook/Documents/CS240LX-spr22/labs/23-memcheck-llvm/part2/build/CMakeFiles/acc_gen.dir
+/Users/tristen-macbook/Documents/CS240LX-spr22/labs/23-memcheck-llvm/part2/build/CMakeFiles/edit_cache.dir
+/Users/tristen-macbook/Documents/CS240LX-spr22/labs/23-memcheck-llvm/part2/build/CMakeFiles/rebuild_cache.dir
+/Users/tristen-macbook/Documents/CS240LX-spr22/labs/23-memcheck-llvm/part2/build/pass/CMakeFiles/MemcheckPass.dir
+/Users/tristen-macbook/Documents/CS240LX-spr22/labs/23-memcheck-llvm/part2/build/pass/CMakeFiles/edit_cache.dir
+/Users/tristen-macbook/Documents/CS240LX-spr22/labs/23-memcheck-llvm/part2/build/pass/CMakeFiles/rebuild_cache.dir
